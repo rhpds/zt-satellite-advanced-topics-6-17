@@ -1,0 +1,42 @@
+---
+virtualmachines:
+  - name: "rhel1"
+    image: "rhel-9-5-11-27-24"
+    memory: "2G"
+    cores: 1
+    image_size: "40G"
+    tags:
+      - key: "AnsibleGroup"
+        value: "bastions"
+    networks:
+      - default
+  - name: "rhel2"
+    image: "rhel-9-5-11-27-24"
+    memory: "2G"
+    cores: 1
+    image_size: "40G"
+    tags:
+      - key: "AnsibleGroup"
+        value: "bastions"
+    networks:
+      - default
+  - name: "satellite"
+    image: "satellite-server-04-07-25"
+    memory: "2G"
+    cores: 1
+    image_size: "40G"
+    tags:
+      - key: "AnsibleGroup"
+        value: "bastions"
+    networks:
+      - default
+  - name: "satellite-2"
+    image: "satellite-server-2-04-01-25"
+    memory: "2G"
+    cores: 1
+    image_size: "40G"
+    tags:
+      - key: "AnsibleGroup"
+        value: "bastions"
+    networks:
+      - default

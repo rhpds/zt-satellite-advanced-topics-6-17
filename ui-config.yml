@@ -1,0 +1,33 @@
+---
+antora:
+  name: modules
+  dir: www
+  modules:
+    - name: "01-introduction"
+      label: "Introduction"
+      solveButton: true
+    - name: "02-image-mode"
+      label: "Image Mode"
+      solveButton: true
+    - name: "03-configure-ansible"
+      label: "Configure Ansible"
+      solveButton: true
+    - name: "04-rex-pull-mode"
+      label: "Rex Pull Mode"
+      solveButton: true
+    - name: "05-custom-repo"
+      label: "Custom Repo"
+      solveButton: true
+    - name: "06-iss-export"
+      label: "Iss Export"
+      solveButton: true
+    - name: "07-iss-network"
+      label: "Iss Network"
+      solveButton: true
+    - name: "08-conclusion"
+      label: "Conclusion"
+      solveButton: true
+
+tabs:
+  - name: ">_ terminal"
+    url: /wetty

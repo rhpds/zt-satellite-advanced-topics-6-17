@@ -87,7 +87,7 @@ virtualmachines:
       userdata: |
         #cloud-config
         fqdn: satellite-2.lab
-        hostname: satellite
+        hostname: satellite-2
         prefer_fqdn_over_hostname: true
         manage_etc_hosts: true
       services:

@@ -91,16 +91,16 @@ virtualmachines:
         prefer_fqdn_over_hostname: true
         manage_etc_hosts: true
       services:
-        - name: satellite-https
+        - name: satellite-2-https
           ports:
             - port: 443
               protocol: TCP
               targetPort: 443
-              name: satellite-https
+              name: satellite-2-https
       routes:
-        - name: satellite-https
-          host: satellite
-          service: satellite-https
+        - name: satellite-2-https
+          host: satellite-2
+          service: satellite-2-https
           targetPort: 443
           tls: true
           tls_termination: reencrypt

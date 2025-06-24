@@ -81,7 +81,7 @@ virtualmachines:
     image_size: "540G"
     tags:
       - key: "AnsibleGroup"
-        value: "bastions"
+        value: "nodes"
     networks:
       - default
     userdata: |

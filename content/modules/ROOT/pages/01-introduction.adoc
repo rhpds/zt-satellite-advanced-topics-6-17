@@ -13,23 +13,8 @@ this lab.
 
 Click on the tab labelled Satellite Web UI as shown in the image below.
 
-.sat tab
-image::../assets/satellite-tab.png[sat tab]
-
-A new tab will open in your web browser stating the connection is
-insecure. This lab has been authored and tested with Google Chrome so
-please try that it if doesn’t load properly.
-
-Ignore the security message about insecure connections by clicking on
-`+Advanced+`.
-
-.insecure
-image::../assets/insecure-warning.png[insecure]
-
-Next click on `+Proceed+`.
-
-.proceed
-image::../assets/proceed.png[proceed]
+.Satellite Web UI tab
+image::satellite-tab.png[sat tab]
 
 You’ll need the following credentials to log into the Satellite Web UI.
 
@@ -46,9 +31,9 @@ bc31c9a6-9ff0-11ec-9587-00155d1b0702
 Now click `+Log In+`.
 
 .login
-image::../assets/webuilogin.png[login]
+image::webuilogin.png[login]
 
 You will be taken to the main dashboard.
 
 .main menu
-image::../assets/main-menu.png[main menu]
+image::main-menu.png[main menu]

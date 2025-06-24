@@ -29,7 +29,7 @@ bc31c9a6-9ff0-11ec-9587-00155d1b0702
 
 Do the following: 1) Click on `+Products+`. 2) Click `+Create Product+`.
 
-image:../assets/create-product.png[../assets/create-product]
+image::create-product.png[../assets/create-product]
 
 Then we’ll create a product called `+bootc+`.
 

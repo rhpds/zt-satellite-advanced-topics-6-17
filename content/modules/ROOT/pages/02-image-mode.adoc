@@ -19,13 +19,15 @@ You’ll need the following credentials to log into the Satellite Web UI.
 
 You can copy and paste each of them below.
 
-....
+[source,bash,run]
+----
 admin
-....
+----
 
-....
+[source,bash,run]
+----
 bc31c9a6-9ff0-11ec-9587-00155d1b0702
-....
+----
 
 Do the following:
 
@@ -40,7 +42,7 @@ Then we’ll create a product called `+bootc+`.
 [arabic]
 . Name the product `+bootc+`.
 
-[source,text]
+[source,bash,run]
 ----
 bootc
 ----
@@ -72,7 +74,7 @@ Do the following to create our activation key.
 . Name the key
 `+bootc-summit+`.
 
-[source,text]
+[source,bash,run]
 ----
 bootc-summit
 ----

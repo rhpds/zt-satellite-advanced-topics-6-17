@@ -27,7 +27,10 @@ admin
 bc31c9a6-9ff0-11ec-9587-00155d1b0702
 ....
 
-Do the following: 1) Click on `+Products+`. 2) Click `+Create Product+`.
+Do the following:
+
+. Click on `+Products+`.
+. Click `+Create Product+`.
 
 .Products
 image::create-product.png[../assets/create-product]
@@ -116,15 +119,18 @@ this link.
 .Booted container images
 image::bootedcontainerimagehosts.png[../assets/bootedcontainerimagehosts]
 
-Next do the following. 1) Check the box to the left of the Power button.
-2) Select "`Schedule Remote Job`".
+Next do the following.
+. Check the box to the left of the Power button.
+. Select "`Schedule Remote Job`".
 
 .Schedule remote job
 image::runremotejobrhel2.png[../assets/runremotejobrhel2]
 
-Next we’ll create a job to check bootc status. 1) Select the "`Bootc`"
-job category. 2) Select "`Bootc Status - Script Default`". 3) Click
-"`Run on selected hosts`".
+Next we’ll create a job to check bootc status.
+
+. Select the "`Bootc`" job category.
+. Select "`Bootc Status - Script Default`".
+. Click "`Run on selected hosts`".
 
 .Run job wizard
 image::bootcstatusjob.png[../assets/bootcstatusjob]
@@ -239,8 +245,9 @@ container images.
 .Lifecycle Environments
 image::lcelibrary.png[../assets/lcelibrary]
 
-In the `+Details+` tab, do the following. 1) Check the
-`+Unauthenticated Pull+` checkbox. 2) Click `+Save+`.
+In the `+Details+` tab, do the following.
+. Check the `+Unauthenticated Pull+` checkbox.
+. Click `+Save+`.
 
 .Library
 image::unauthpull.png[../assets/unauthpull]
@@ -281,22 +288,26 @@ satellite.lab/acme_org/bootc/rhel10beta:summit-2025
 
 == Schedule a Remote Job to initiate an update of our image mode host rhel2
 
-Let’s schedule a remote job. 1) Go to all hosts and check the box for
-`+rhel2+`. 2) Click on `+Schedule Remote Job+` in the `+Select Action+`
-dropdown menu.
+Let’s schedule a remote job.
+. Go to all hosts and check the box for `+rhel2+`.
+. Click on `+Schedule Remote Job+` in the `+Select Action+` dropdown menu.
 
 .Schedule Remote Job
 image::runremotejobrhel2.png[../assets/runremotejobrhel2]
 
 In the Category and template section of the Run job menu, do the
-following. 1) Select the `+Bootc+` Job category. 2) Select the
-`+Bootc Switch - Script Default+`. 3) Click `+Next+`.
+following.
+. Select the `+Bootc+` Job category.
+. Select the `+Bootc Switch - Script Default+`.
+. Click `+Next+`.
 
 .Bootc switch
 image::bootcswitch.png[../assets/bootcswitch]
 
 In the Target hosts and inputs section of the Run job menu, do the
-following. 1) Paste the label of the updated container image in the
+following.
+
+. Paste the label of the updated container image in the
 target field.
 
 [source,text]

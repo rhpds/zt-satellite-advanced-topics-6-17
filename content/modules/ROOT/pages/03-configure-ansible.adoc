@@ -22,7 +22,6 @@ Ansible Collection. ##Do not run it##.
 ----
 satellite-maintain packages install -y ansible-collection-redhat-satellite
 ----
-____
 
 .output
 image::ansiblecollectionoutput.png[output]

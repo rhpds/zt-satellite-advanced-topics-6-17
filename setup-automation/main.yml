@@ -116,7 +116,7 @@
     ansible.builtin.add_host:
       name: "node2"
       ansible_ssh_host: ""
-      ansible_ssh_user: "root
+      ansible_ssh_user: "root"
       ansible_ssh_pass: ""
       ansible_ssh_private_keyfile: "/tmp/{{ guid }}key.pem"
 

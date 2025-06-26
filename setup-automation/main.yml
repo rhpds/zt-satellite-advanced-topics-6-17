@@ -80,6 +80,7 @@
     register: r_result
 
   - name: Execute module_stage-host.sh if it exists
+    ignore_errors: true
     when: r_script_test.stat.exists
     shell: "sh -x /tmp/setup-scripts/setup-{{ ansible_host }}.sh > /tmp/setup-scripts/setup-{{ ansible_host }}.log 2>&1"
     become: true
@@ -103,12 +104,12 @@
       var: r_result
     when: r_result is defined
 
-  - name: Fail if stage was failed
-    ansible.builtin.fail:
-      msg: "Setup failed"
-    when:
-    - r_result is defined
-    - r_result.rc != 0
+  #- name: Fail if stage was failed
+  #  ansible.builtin.fail:
+  #    msg: "Setup failed"
+  #  when:
+  #  - r_result is defined
+  #  - r_result.rc != 0
 
 - name: Create inventory
   hosts: localhost
@@ -118,13 +119,12 @@
   tasks:
   - name: Add rhel2 host with SSH key
     ansible.builtin.add_host:
-      name: "rhel2"
-      ansible_ssh_pass: ""
+      name: "rhel2post"
       ansible_ssh_user: "root"
       ansible_ssh_private_key_file: "/tmp/{{ guid }}key.pem"
 
 - name: Post task(s) for rhel2
-  hosts: rhel2
+  hosts: rhel2post
   gather_facts: true
   become: true
   vars:

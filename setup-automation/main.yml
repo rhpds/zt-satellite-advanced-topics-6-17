@@ -116,7 +116,7 @@
   - name: Add rhel2 host with SSH key
     ansible.builtin.add_host:
       name: "rhel2"
-      ansible_ssh_private_keyfile: "/tmp/{{ guid }}key.pem"
+      ansible_ssh_private_key_file: "/tmp/{{ guid }}key.pem"
 
 - name: Post task(s) for rhel2
   hosts: rhel2

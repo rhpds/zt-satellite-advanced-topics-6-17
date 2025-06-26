@@ -77,6 +77,7 @@
 
   - name: Execute module_stage-host.sh if it exists
     when: r_script_test.stat.exists
+    ignore_errors: true
     shell: "sh -x /tmp/setup-scripts/setup-{{ ansible_host }}.sh > /tmp/setup-scripts/setup-{{ ansible_host }}.log 2>&1"
     become: true
     register: r_result
@@ -144,3 +145,9 @@
       ansible.builtin.user:
         name: root
         password: "{{ rhel_user_password | password_hash('sha512') }}" # Generates SHA512 hash from prompted password
+- name: Create inventory
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - ansible.builtin.pause:
+        minutes: 1

@@ -43,6 +43,7 @@
     ansible.builtin.copy:
       dest: "/tmp/{{ guid }}key.pem"
       content: "{{ r_slurp['content'] | b64decode }}"
+      mode: 0600
     delegate_to: localhost
 
   

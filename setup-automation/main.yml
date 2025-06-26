@@ -23,6 +23,21 @@
       - rhel1
       - rhel2
       - satellite-2
+
+- name: Pre task(s) for rhel2
+  hosts: rhel2
+  gather_facts: false
+  vars:
+    guid: "{{ lookup('ansible.builtin.env', 'GUID') }}"
+  tasks:
+  - name: Fetch private SSH key to be used later
+    ansible.builtin.fetch:
+      src: "/home/rhel/.ssh/{{ guid }}.pem"
+      dest: "/tmp/{{ guid }}.pem"
+      flat: yes
+  
+
+  
 - name: Demo Playbook for the ansible-runner API
   hosts: all:!localhost
   gather_facts: false
@@ -87,3 +102,39 @@
     - r_result is defined
     - r_result.rc != 0
 
+- name: Create inventory
+  hosts: localhost
+  gather_facts: false
+  vars:
+    guid: "{{ lookup('ansible.builtin.env', 'GUID') }}"
+  tasks:
+  - name: Add node2 host with SSH key
+    ansible.builtin.add_host:
+      name: "node2"
+      ansible_ssh_host: ""
+      ansible_ssh_user: "{{ lookup('ansible.builtin.env', 'BASTION_USER') }}"
+      ansible_ssh_pass: ""
+      ansible_ssh_private_keyfile: "/tmp/{{ guid }}.pem"
+
+- name: Post task(s) for rhel2
+  hosts: rhel2
+  gather_facts: false
+  vars:
+    rhel_user_password: "{{ lookup('ansible.builtin.env', 'BASTION_PASSWORD') }}"
+  tasks:
+    - name: Ensure user 'rhel' exists and has the specified password
+      ansible.builtin.user:
+        name: rhel
+        password: "{{ rhel_user_password | password_hash('sha512') }}" # Generates SHA512 hash from prompted password
+        state: present
+        shell: /bin/bash         # Set default shell
+        create_home: yes         # Ensure home directory is created
+        home: /home/rhel         # Specify home directory path
+        groups: wheel            # Add user to the 'wheel' group (for sudo access, typically)
+        append: yes              # Append to existing groups if user already exists
+
+    - name: Ensure user 'root' has the specified password
+      become: true
+      ansible.builtin.user:
+        name: root
+        password: "{{ rhel_user_password | password_hash('sha512') }}" # Generates SHA512 hash from prompted password

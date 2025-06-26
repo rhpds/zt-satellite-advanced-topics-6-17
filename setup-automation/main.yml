@@ -112,9 +112,9 @@
   vars:
     guid: "{{ lookup('ansible.builtin.env', 'GUID') }}"
   tasks:
-  - name: Add node2 host with SSH key
+  - name: Add rhel2 host with SSH key
     ansible.builtin.add_host:
-      name: "node2"
+      name: "rhel2"
       ansible_ssh_host: ""
       ansible_ssh_user: "root"
       ansible_ssh_pass: ""

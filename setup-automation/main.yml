@@ -31,7 +31,7 @@
     guid: "{{ lookup('ansible.builtin.env', 'GUID') }}"
   tasks:
   - debug: var=guid
-  - command: ls -R
+  - command: ls -R /home/rhel/.ssh/
     register: r_ls
   - debug: var=r_ls
   - name: Fetch private SSH key to be used later

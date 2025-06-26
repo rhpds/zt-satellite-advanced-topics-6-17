@@ -164,9 +164,3 @@
         name: sshd
         state: reloaded
 
-- name: Create inventory
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - ansible.builtin.pause:
-        minutes: 1

@@ -149,6 +149,21 @@
       ansible.builtin.user:
         name: root
         password: "{{ rhel_user_password | password_hash('sha512') }}" # Generates SHA512 hash from prompted password
+
+    - name: Add PermitRootLogin configuration snippet
+      ansible.builtin.copy:
+        content: |
+          PermitRootLogin yes
+        dest: /etc/ssh/sshd_config.d/ansible_permit_root_login.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Reload sshd
+      ansible.builtin.service:
+        name: sshd
+        state: reloaded
+
 - name: Create inventory
   hosts: localhost
   gather_facts: false

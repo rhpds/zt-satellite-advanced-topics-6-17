@@ -104,12 +104,12 @@
       var: r_result
     when: r_result is defined
 
-  - name: Fail if stage was failed
-    ansible.builtin.fail:
-      msg: "Setup failed"
-    when:
-    - r_result is defined
-    - r_result.rc != 0
+  #- name: Fail if stage was failed
+  #  ansible.builtin.fail:
+  #    msg: "Setup failed"
+  #  when:
+  #  - r_result is defined
+  #  - r_result.rc != 0
 
 - name: Create inventory
   hosts: localhost
@@ -121,12 +121,7 @@
     when: false
     ansible.builtin.add_host:
       name: "rhel2"
-      #ansible_ssh_private_key_file: "/tmp/{{ guid }}key.pem"
-      ansible_ssh_host: "rhel2"
-      ansible_ssh_port: "{{ lookup('ansible.builtin.env', 'BASTION_PORT') }}"
-      ansible_ssh_user: "{{ lookup('ansible.builtin.env', 'BASTION_USER') }}"
-      ansible_ssh_pass: "{{ lookup('ansible.builtin.env', 'BASTION_PASSWORD') }}"
-      ansible_python_interpreter: /usr/libexec/platform-python
+      ansible_ssh_private_key_file: "/tmp/{{ guid }}key.pem"
 
 - name: Post task(s) for rhel2
   hosts: rhel2

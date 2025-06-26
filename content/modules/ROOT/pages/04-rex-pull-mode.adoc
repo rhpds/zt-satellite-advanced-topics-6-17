@@ -53,7 +53,7 @@ Click on the link:tab-0[button label="`Satellite Server`"
 background="`#ee0000`" color="`#c7c7c7`"] tab.
 
 .satellite server tab
-image::../assets/satellite-server-tab.png[satellite server tab]
+image::satellite.lab-terminal.png[satellite server tab]
 
 Run the following command.
 

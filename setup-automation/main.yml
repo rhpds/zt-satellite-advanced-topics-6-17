@@ -126,7 +126,10 @@
   vars:
     rhel_user_password: "{{ lookup('ansible.builtin.env', 'BASTION_PASSWORD') }}"
   tasks:
+    - name: Reboot the system
+      ansible.builtin.reboot:
     - name: Ensure user 'rhel' exists and has the specified password
+      become: true
       ansible.builtin.user:
         name: rhel
         password: "{{ rhel_user_password | password_hash('sha512') }}" # Generates SHA512 hash from prompted password

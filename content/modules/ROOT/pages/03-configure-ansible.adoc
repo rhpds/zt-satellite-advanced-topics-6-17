@@ -60,8 +60,6 @@ tee ~/config.yml << EOF
       content_overrides:
           - label: satellite-client-6-for-rhel-10-x86_64-rpms
             override: enabled
-          - label: Acme_Org_Satellite_Extras_Satellite
-            override: enabled
 EOF
 ----
 

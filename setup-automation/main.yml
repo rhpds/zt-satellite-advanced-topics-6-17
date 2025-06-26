@@ -36,8 +36,8 @@
   - debug: var=r_ls
   - name: Fetch private SSH key to be used later
     ansible.builtin.fetch:
-      src: "/home/rhel/.ssh/{{ guid }}.pem"
-      dest: "/tmp/{{ guid }}.pem"
+      src: "/home/rhel/.ssh/{{ guid }}key.pem"
+      dest: "/tmp/{{ guid }}key.pem"
       flat: yes
   
 
@@ -118,7 +118,7 @@
       ansible_ssh_host: ""
       ansible_ssh_user: "{{ lookup('ansible.builtin.env', 'BASTION_USER') }}"
       ansible_ssh_pass: ""
-      ansible_ssh_private_keyfile: "/tmp/{{ guid }}.pem"
+      ansible_ssh_private_keyfile: "/tmp/{{ guid }}key.pem"
 
 - name: Post task(s) for rhel2
   hosts: rhel2

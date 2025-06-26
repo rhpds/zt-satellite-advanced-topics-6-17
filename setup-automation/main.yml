@@ -117,7 +117,6 @@
     guid: "{{ lookup('ansible.builtin.env', 'GUID') }}"
   tasks:
   - name: Add rhel2 host with SSH key
-    when: false
     ansible.builtin.add_host:
       name: "rhel2"
       ansible_ssh_pass: ""

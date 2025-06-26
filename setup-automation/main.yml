@@ -35,11 +35,15 @@
     register: r_ls
   - debug: var=r_ls
   - name: Fetch private SSH key to be used later
-    ansible.builtin.fetch:
+    ansible.builtin.slurp:
       src: "/home/rhel/.ssh/{{ guid }}key.pem"
+    register: r_slurp
+    
+  - name: Save to tmp
+    ansible.builtin.copy:
       dest: "/tmp/{{ guid }}key.pem"
-      flat: yes
-  
+      content: "{{ r_slurp['content'] | b64decode }}"
+    delegate_to: localhost
 
   
 - name: Demo Playbook for the ansible-runner API

@@ -33,7 +33,7 @@
   - debug: var=guid
   - command: ls -R
     register: r_ls
-  - debug: var=r_rls
+  - debug: var=r_ls
   - name: Fetch private SSH key to be used later
     ansible.builtin.fetch:
       src: "/home/rhel/.ssh/{{ guid }}.pem"

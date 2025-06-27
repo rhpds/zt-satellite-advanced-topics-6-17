@@ -1,3 +1,5 @@
+== Image Mode
+
 Image mode is a new approach to operating system (OS) deployment that
 lets users build, deploy, and manage Red Hat Enterprise Linux as a bootc
 container image.

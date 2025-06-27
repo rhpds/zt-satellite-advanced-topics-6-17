@@ -1,3 +1,5 @@
+== Configure Satellite with the Satellite Ansible Collection.
+
 In this assignment, we’ll create an ansible playbook to automatically
 configure the Satellite server. Red Hat provides an Ansible collection
 to manage Red Hat Satellite configuration. Ansible playbooks are useful

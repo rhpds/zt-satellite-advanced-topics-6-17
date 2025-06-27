@@ -1,3 +1,5 @@
+== Remote Execution (REX) Pull Mode
+
 Since Satellite 6.12, Remote Execution or REX has provided the option of
 a "`pull mode`". Remote execution pull mode uses Message Queuing
 Telemetry Transport (MQTT) to publish jobs on Capsule servers (or
@@ -49,8 +51,7 @@ Satellite WebUI but due to the limitations of DNS in this lab
 environment, we’ll use the cli utility `+hammer+` to simplify the
 process.
 
-Click on the link:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"] tab.
+Click on `satellite.lab terminal`.
 
 .satellite server tab
 image::satellite.lab-terminal.png[satellite server tab]
@@ -60,7 +61,7 @@ Run the following command.
 [source,bash,run]
 ----
 export regscript=$(hammer host-registration generate-command --activation-key RHEL9 --setup-insights 0 --insecure 1 --force 1)
-ssh -o "StrictHostKeyChecking no" rhel1 $regscript
+ssh -o "StrictHostKeyChecking no" root@rhel1 $regscript
 ----
 
 In order to save time, the command used above creates a global
@@ -69,11 +70,7 @@ SSH on `+rhel1+`.
 
 == Enable pull mode on the Satellite server
 
-Click this button link:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"] to switch to the
-`+Satellite Server+` terminal and click `+run+` to run the following
-command. This command installs the MQTT broker on the
-`+Satellite Server+`.
+Copy and paste the following to the `satellite.lab terminal` and run the command.
 
 [source,bash,run]
 ----
@@ -82,19 +79,15 @@ satellite-installer --foreman-proxy-plugin-remote-execution-script-mode pull-mqt
 
 == Open required firewall ports on the Satellite server
 
-Open the required firewall ports with the following command in the
-link:tab-0[button label="`Satellite Server`" background="`#ee0000`"
-color="`#c7c7c7`"] tab.
+Open the required firewall ports with the following command.
 
 [source,bash,run]
 ----
 firewall-cmd --permanent --add-port="1883/tcp" && firewall-cmd --reload
 ----
 
-____
-[!NOTE] There is currently no support for changing this port to a
+NOTE: There is currently no support for changing this port to a
 different port number.
-____
 
 Port 1883 is required to be open on the Satellite server to enable hosts
 to subscribe to updates. That is, the RHEL hosts need to be able to tell
@@ -113,8 +106,7 @@ capsule server depending on the following
 https://access.redhat.com/documentation/en-us/red_hat_satellite/6.16/html/managing_hosts/configuring_and_setting_up_remote_jobs_managing-hosts#remote-execution-workflow_managing-hosts[rules
 in this document].
 
-Copy and run this in the link:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"] terminal.
+Copy and run the following script.
 
 [source,bash,run]
 ----

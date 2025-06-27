@@ -5,28 +5,28 @@ antora:
   modules:
     - name: "01-introduction"
       label: "Introduction"
-      solveButton: true
+      solveButton: false
     - name: "02-image-mode"
       label: "Image Mode"
-      solveButton: true
+      solveButton: false
     - name: "03-configure-ansible"
       label: "Configure Ansible"
-      solveButton: true
+      solveButton: false
     - name: "04-rex-pull-mode"
       label: "Rex Pull Mode"
-      solveButton: true
+      solveButton: false
     - name: "05-custom-repo"
       label: "Custom Repo"
-      solveButton: true
+      solveButton: false
     - name: "06-iss-export"
       label: "Iss Export"
-      solveButton: true
+      solveButton: false
     - name: "07-iss-network"
       label: "Iss Network"
-      solveButton: true
+      solveButton: false
     - name: "08-conclusion"
       label: "Conclusion"
-      solveButton: true
+      solveButton: false
 
 tabs:
   - name: "Satellite Web UI"

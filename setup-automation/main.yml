@@ -45,7 +45,7 @@
 
   - name: Fetch /etc/hosts
     ansible.builtin.slurp:
-      src: "/etc/hosts
+      src: "/etc/hosts"
     register: r_etc_hosts
 
   - name: Save to tmp

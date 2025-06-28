@@ -72,20 +72,20 @@ Run the playbook.
 ansible-playbook customrepo.yml
 ----
 
-== Update the RHEL9 content view and publish and promote it
+== Update the RHEL10 content view and publish and promote it
 
 In order to make the `+hello+` rpm available to `+rhel+`, we must add
-the repo to the `+RHEL9+` content view. You may recall in the previous
-assignment, we had to create the `+RHEL9+` content view, containing the
-RHEL9 BaseOS repo and publish it. Then we had to promote the `+RHEL9+`
+the repo to the `+RHEL10+` content view. You may recall in the previous
+assignment, we had to create the `+RHEL10+` content view, containing the
+RHEL10 BaseOS repo and publish it. Then we had to promote the `+RHEL10+`
 content view to the `+Capsule Production+` lifecycle environment.
 Finally we manually synchronized the `+Capsule Production+` lifecycle
 environment to `+capsule.lab+`.
 
 To replicate the custom repository we just created in this assignment,
-we’ll need to update the `+RHEL9+` content view to add
+we’ll need to update the `+RHEL10+` content view to add
 `+My custom repository+` and publish it. Then we’ll promote the new
-version of the `+RHEL9+` content view to the `+Capsule Production+`
+version of the `+RHEL10+` content view to the `+Capsule Production+`
 lifecycle environment which will automatically synchronize to
 `+capsule.lab+`.
 
@@ -97,18 +97,18 @@ background="`#ee0000`" color="`#c7c7c7`"]. Then click on `+run+` below.
 ----
 tee ~/customrepopublishpromote.yml << EOF
 ---
-- name: Publish and promote a new version of the RHEL9 content view.
+- name: Publish and promote a new version of the RHEL10 content view.
   hosts: localhost
   remote_user: root
 
   tasks:
-  - name: "Update RHEL9 content view"
+  - name: "Update RHEL10 content view"
     redhat.satellite.content_view:
       username: "admin"
       password: "bc31c9a6-9ff0-11ec-9587-00155d1b0702"
       server_url: "https://satellite.lab"
       organization: "Acme Org"
-      name: "RHEL9"
+      name: "RHEL10"
       repositories:
         - name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9'
           product: 'Red Hat Enterprise Linux for x86_64'

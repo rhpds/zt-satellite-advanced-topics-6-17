@@ -133,7 +133,7 @@ image:../assets/recommendedrepos.png[../assets/recommendedrepos]
 Select the `+Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9+`
 repository.
 
-image:../assets/selectrhel9baseos.gif[../assets/selectrhel9baseos]
+image:../assets/selectRHEL10baseos.gif[../assets/selectRHEL10baseos]
 
 It is possible to select this repository because it has been provided by
 the upstream satellite server `+satellite.lab+`.

@@ -60,12 +60,12 @@ Run the following command.
 
 [source,bash,run]
 ----
-export regscript=$(hammer host-registration generate-command --activation-key RHEL9 --setup-insights 0 --insecure 1 --force 1)
+export regscript=$(hammer host-registration generate-command --activation-key RHEL10 --setup-insights 0 --insecure 1 --force 1)
 ssh -o "StrictHostKeyChecking no" root@rhel1 $regscript
 ----
 
 In order to save time, the command used above creates a global
-registration script that uses the RHEL9 activation key and runs it via
+registration script that uses the RHEL10 activation key and runs it via
 SSH on `+rhel1+`.
 
 == Enable pull mode on the Satellite server
@@ -292,7 +292,7 @@ From the Satellite server, we’ll register `+rhel1+` to Satellite again.
 
 [source,bash,run]
 ----
-export regscript=$(hammer host-registration generate-command --activation-key RHEL9 --setup-insights 0 --insecure 1 --force 1)
+export regscript=$(hammer host-registration generate-command --activation-key RHEL10 --setup-insights 0 --insecure 1 --force 1)
 ssh -o "StrictHostKeyChecking no" rhel1 $regscript
 ----
 

@@ -14,9 +14,9 @@ systems. In this assignment, we’ll walk through the steps of registering
 and updating an image mode system.
 
 =====
-====
 .Create a container repository in Satellite
 [%collapsible]
+====
 
 Go to the Satellite Web UI.
 

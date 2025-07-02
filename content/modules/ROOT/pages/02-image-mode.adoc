@@ -13,6 +13,10 @@ Red Hat Satellite 6.17 supports the management of RHEL image mode
 systems. In this assignment, we’ll walk through the steps of registering
 and updating an image mode system.
 
+== Create a container repository in Satellite
+
+The first step is to create a container repository in Satellite that will provide a method for storing image mode images.
+
 =====
 .Create a container repository in Satellite
 [%collapsible]
@@ -66,6 +70,10 @@ In this lab environment, we have a ready-built image mode host named
 `+rhel2+`. We will generate an activation key and register `+rhel2+` to
 the Satellite server.
 
+=====
+.Create an activation key for image mode host
+[%collapsible]
+====
 Go to the Activation Keys menu.
 
 .Activation Keys
@@ -93,8 +101,17 @@ bootc-summit
 
 .Create activation key wizard
 image::createactivationkeysteps.png[../assets/createactivationkeysteps]
+====
+=====
 
 == Register the image mode host rhel2 to Satellite
+
+To manage our image mode host, we'll register it with Satellite.
+
+=====
+.Register the image mode host rhel2 with Satellite
+[%collabpsible]
+====
 
 Switch to the `satellite.lab terminal`.
 
@@ -113,6 +130,8 @@ Here’s what the successful registration looks like.
 
 .Successful registration
 image::successregisterrhel2.png[]
+====
+=====
 
 == Verify image mode host details in Satellite
 

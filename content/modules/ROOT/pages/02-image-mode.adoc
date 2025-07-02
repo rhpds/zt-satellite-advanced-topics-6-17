@@ -13,7 +13,10 @@ Red Hat Satellite 6.17 supports the management of RHEL image mode
 systems. In this assignment, we’ll walk through the steps of registering
 and updating an image mode system.
 
-== Create a container repository in Satellite
+=====
+====
+.Create a container repository in Satellite
+[%collapsible]
 
 Go to the Satellite Web UI.
 
@@ -54,6 +57,8 @@ bootc
 
 .Create Product wizard
 image::createproduct.png[../assets/createproduct]
+====
+=====
 
 == Create an activation key for our image mode host
 

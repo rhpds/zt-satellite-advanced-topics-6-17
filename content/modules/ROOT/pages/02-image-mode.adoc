@@ -152,6 +152,7 @@ this link.
 image::bootedcontainerimagehosts.png[../assets/bootedcontainerimagehosts]
 
 Next do the following.
+
 . Check the box to the left of the Power button.
 . Select "`Schedule Remote Job`".
 
@@ -346,6 +347,7 @@ Now we'll initiate an operation to update the image on the image mode host.
 ====
 
 Let’s schedule a remote job.
+
 . Go to all hosts and check the box for `+rhel2+`.
 . Click on `+Schedule Remote Job+` in the `+Select Action+` dropdown menu.
 
@@ -410,6 +412,11 @@ reboot
 ----
 
 Wait for the `rhel2.lab` system to come back online. You may need to click the `reconnect` button a couple times.
+
+If the terminal looks like it is stuck trying to connect, click on the refresh button:
+
+.Refresh button
+image::rhel2-refresh-button.png[]
 
 The terminal will reconnect and display the new message-of-the-day (MOTD).
 

@@ -110,7 +110,7 @@ To manage our image mode host, we'll register it with Satellite.
 
 =====
 .Register the image mode host rhel2 with Satellite
-[%collabpsible]
+[%collapsible]
 ====
 
 Switch to the `satellite.lab terminal`.
@@ -137,6 +137,10 @@ image::successregisterrhel2.png[]
 
 Let’s explore the image mode information available in Satellite.
 
+=====
+.View image mode information in Satellite
+[%collapsible]
+====
 Navigate back to the Satellite Web UI.
 
 [arabic]
@@ -192,6 +196,8 @@ image::runningimagehostsmenu.png[../assets/runningimagehostsmenu]
 Here you can also see the "`Running image`" details which we will need
 to use in the next step. This information is populated only after the
 bootc status job is run or approximately every 4 hours.
+====
+=====
 
 == Update the container image
 
@@ -199,6 +205,10 @@ The container image running on `+rhel2+` is stored in a quay.io
 registry. We want to modify that image. We’ll use the host `+rhel1+` to
 pull down that container image from quay.io and update it.
 
+=====
+.Update the container image
+[%collapsible]
+====
 Navigate to the `rhel1.lab terminal`.
 
 Copy and run the script below.
@@ -226,12 +236,18 @@ The command we just ran, applies the tag
 `+satellite.lab/acme_org/bootc/rhel10beta:summit-2025+` to our newly
 built container. The tag is the name assigned to the container image in
 the Satellite container registry.
+====
+=====
 
 == Push the new container to Satellite’s container registry
 
 Now we’ll push the updated container image from `rhel1.lab terminal` to the
 Satellite container registry.
 
+=====
+.Push container to Satellite's container registry
+[%collapsible]
+====
 In the `rhel1.lab terminal`, log into Satellite container registry by
 running the following command.
 
@@ -246,12 +262,18 @@ From `+rhel1+` we’ll push our updated container image to Satellite.
 ----
 podman push satellite.lab/acme_org/bootc/rhel10beta:summit-2025 --tls-verify=false
 ----
+====
+=====
 
 == Enable unauthenticated pull operations for container images on Satellite
 
 For the sake of simplicity, we want to enable unauthenticated pull for
 container images.
 
+=====
+.Enable unauthenticated pull operations for container images on Satellite
+[%collapsible]
+====
 Navigate back to the `Satellite Web UI` tab.
 
 [arabic]
@@ -267,8 +289,17 @@ In the `+Details+` tab, do the following.
 
 .Library
 image::unauthpull.png[../assets/unauthpull]
+====
+=====
 
 == Obtain the container image label.
+
+In order to perform maintenance operations with an image mode image, you'll need to specify the version of the image. In this assignment we'll show you how to find it.
+
+=====
+.Obtain the container image label
+[%collapsible]
+====
 
 Go to the `+Products+` menu. Click on the `+bootc+` product.
 
@@ -302,7 +333,17 @@ image::publishedat.png[../assets/publishedat]
 satellite.lab/acme_org/bootc/rhel10beta:summit-2025
 ----
 
+====
+=====
+
 == Schedule a Remote Job to initiate an update of our image mode host rhel2
+
+Now we'll initiate an operation to update the image on the image mode host.
+
+=====
+.Initiate an update of the image mode host
+[%collapsible]
+====
 
 Let’s schedule a remote job.
 . Go to all hosts and check the box for `+rhel2+`.
@@ -392,3 +433,6 @@ You can now see that the image mode host `+rhel2+` is now running our
 updated image labelled
 `+satellite.lab/acme_org/bootc/rhel10beta:summit-2025+` and you’ll also
 see that you can roll back to the previous image if required.
+
+====
+=====

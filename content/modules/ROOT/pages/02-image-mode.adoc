@@ -51,7 +51,7 @@ Then we’ll create a product called `+bootc+`.
 [arabic]
 . Name the product `+bootc+`.
 
-[source,bash,run]
+[source,js]
 ----
 bootc
 ----
@@ -89,7 +89,7 @@ Do the following to create our activation key.
 . Name the key
 `+bootc-summit+`.
 
-[source,bash,run]
+[source,js]
 ----
 bootc-summit
 ----
@@ -210,7 +210,7 @@ pull down that container image from quay.io and update it.
 .Update the container image
 [%collapsible]
 ====
-Navigate to the `rhel1.lab terminal`.
+##Navigate to the `rhel1.lab terminal`##.
 
 Copy and run the script below.
 

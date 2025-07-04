@@ -37,7 +37,6 @@ pull mode by installing the katello-pull-transport-migrate package.
 Documentation is provided at the bottom of this post. The katello agent
 has been deprecated as of Satellite 6.7.
 
-Katello Agent is removed from Satellite 6.17.
 
 == Register the host rhel1 to the Satellite server
 
@@ -51,12 +50,16 @@ Satellite WebUI but due to the limitations of DNS in this lab
 environment, we’ll use the cli utility `+hammer+` to simplify the
 process.
 
+=====
+.Register the host rhel1 to the Satellite server
+[%collapsible]
+====
 Click on `satellite.lab terminal`.
 
 .satellite server tab
 image::satellite.lab-terminal.png[satellite server tab]
 
-Run the following command.
+Run the following command in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
@@ -68,16 +71,36 @@ In order to save time, the command used above creates a global
 registration script that uses the RHEL10 activation key and runs it via
 SSH on `+rhel1+`.
 
+====
+=====
+
 == Enable pull mode on the Satellite server
 
-Copy and paste the following to the `satellite.lab terminal` and run the command.
+Now we'll run a command to enable REX pull mode on the Satellite server.
+
+=====
+.Enable pull mode on the Satellite server
+[%collapsible]
+====
+
+Run the command below in the `satellite.lab terminal`.
 
 [source,bash,run]
 ----
 satellite-installer --foreman-proxy-plugin-remote-execution-script-mode pull-mqtt
 ----
 
+====
+=====
+
 == Open required firewall ports on the Satellite server
+
+We'll need to open port 1883 to enable MQTT communication between RHEL systems and the Satellite server.
+
+=====
+.Open required firewall ports on the Satellite server
+[%collapsible]
+====
 
 Open the required firewall ports with the following command.
 
@@ -97,6 +120,9 @@ are available to be run.
 Upon notification that a REX job is available, the RHEL host downloads
 the REX job from the Satellite server via HTTPS (port 443).
 
+====
+=====
+
 == Configure jobs to be sent through the capsule service that the host was registered to
 
 The following setting enables hosts to receive REX jobs through the
@@ -105,6 +131,11 @@ setting is not made, REX jobs would be dispatched through a satellite or
 capsule server depending on the following
 https://access.redhat.com/documentation/en-us/red_hat_satellite/6.16/html/managing_hosts/configuring_and_setting_up_remote_jobs_managing-hosts#remote-execution-workflow_managing-hosts[rules
 in this document].
+
+=====
+.Configure jobs to be sent through the capsule service that the host was registered to
+[%collapsible]
+====
 
 Copy and run the following script.
 
@@ -127,22 +158,27 @@ tee ~/rexsetting.yml << EOF
 EOF
 ----
 
-Run the playbook.
+Run the playbook in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
 ansible-playbook rexsetting.yml
 ----
 
+====
+=====
+
 == Migrate the rhel1 host to REX pull mode
 
 At the beginning of this assignment, we registered the host `+rhel1+` to
 use REX in "`push`" or SSH mode. We’ll now migrate it to "`pull`" mode.
 
-Click this button link:tab-2[button label="`rhel1`"
-background="`#ee0000`" color="`#c7c7c7`"] to switch to the `+rhel1+` tab
-and install `+katello-pull-transport-migrate+` by running the following
-command.
+=====
+.Migrate the rhel1 host to REX pull mode
+[%collapsible]
+====
+
+In the `rhel1.lab terminal` run this command.
 
 [source,bash,run]
 ----
@@ -156,7 +192,7 @@ was added to the satellite server and enabled by the activation key in
 the second task of this lab.
 ____
 
-Check that the MQTT agent `+yggdrasild+` is running.
+Check that the MQTT agent `+yggdrasild+` is running in `rhel1.lab terminal`.
 
 [source,bash,run]
 ----
@@ -166,13 +202,21 @@ systemctl status yggdrasild
 The output should look like the screenshot below.
 
 .yggdrasild service
-image::../assets/yggdrasildservicestatus.png[yggdrasild service]
+image::yggdrasildservicestatus.png[yggdrasild service]
+
+====
+=====
 
 == Test out REX pull mode
 
-Now we’ll run a test to confirm that REX pull mode is working. On
-link:tab-2[button label="`rhel1`" background="`#ee0000`"
-color="`#c7c7c7`"], run the following command to tail the `+messages+`
+Now we’ll run a test to confirm that REX pull mode is working.
+
+=====
+.Test REX pull mode
+[%collapsible]
+====
+
+In `rhel1.lab terminal` run the following command to tail the `+messages+`
 log file.
 
 [source,bash,run]
@@ -182,24 +226,24 @@ tail -f /var/log/messages
 
 Now go into the Satellite Web UI and navigate to `+All hosts+`.
 
-.all hosts
-image::../assets/allhosts.png[all hosts]
+.All hosts
+image::allhosts.png[all hosts]
 
 Click the checkbox for `+rhel1+`.
 
 .rhel1
-image::../assets/selectrhel1.png[rhel1]
+image::selectrhel1.png[rhel1]
 
 Schedule a remote job for `+rhel1+`.
 
-.schedule
-image::../assets/schedulerhel1.png[schedule]
+.Schedule a remote job
+image::schedulerhel1.png[schedule]
 
 In the `+Category and template menu+`, don’t change any parameters and
 click next.
 
-.cat
-image::../assets/categoryandtemplate.png[cat]
+.Category and template
+image::categoryandtemplate.png[cat]
 
 In the `+Target hosts and inputs menu+` do the following:
 
@@ -207,24 +251,32 @@ In the `+Target hosts and inputs menu+` do the following:
 . Enter `+uname -a+` in the `+command+` box.
 . Click `+Run on selected hosts+`.
 
-.target
-image::../assets/targethostsandinputs.png[target]
+.Target hosts and inputs
+image::targethostsandinputs.png[target]
 
 The REX pull mode job will execute. Once the `+Results+` menu shows
 100%, click on the `+rhel1+` tab.
 
 The `+messages+` log file should display something similar to this.
 
-.ygg successful
-image::../assets/successfulyggdrasild.png[ygg successful]
+.yggdrasild service successfully received message
+image::successfulyggdrasild.png[ygg successful]
+
+====
+=====
 
 == Configure Satellite to automatically configure REX pull mode when registering new hosts
 
 At present, Satellite will register hosts in REX SSH mode by default.
 We’ll need to set a new Global Parameter to enable pull mode by default,
-with a global parameter. In the link:tab-0[button label="`Satellite
-Server`" background="`#ee0000`" color="`#c7c7c7`"] terminal, enter the
-following command.
+with a global parameter.
+
+=====
+.Configure REX pull mode to be default
+[%collapsible]
+====
+
+In the `satellite.lab terminal` run the following command.
 
 [source,bash,run]
 ----
@@ -247,8 +299,7 @@ tee ~/rexdefault.yml << EOF
 EOF
 ----
 
-Run the playbook in the link:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"] terminal.
+Run the playbook in the `satellite.lab terminal`.
 
 [source,bash,run]
 ----
@@ -261,13 +312,16 @@ This playbook creates a global parameter
 You can check to see this parameter was successfully created by
 navigating to the `+Global Parameters+` menu.
 
-.global params
-image::../assets/globalparameters.png[global params]
+.Global parameters
+image::globalparameters.png[global params]
 
 You can see the newly created global parameter is set.
 
-.global param set
-image::../assets/rexpulltrue.png[global param set]
+.Global parameter set
+image::rexpulltrue.png[global param set]
+
+====
+=====
 
 == Register rhel1 to verify automatic configuration of REX pull mode
 
@@ -275,9 +329,13 @@ Let’s unregister `+rhel1+` from our Satellite server. After that we’ll
 register `+rhel1+` again to show that REX pull mode is automatically
 enabled.
 
-In the link:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"] terminal run the following
-command.
+=====
+.Verify automatic REX pull configuration
+[%collapsible]
+====
+
+Run the following
+command in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
@@ -288,7 +346,7 @@ This command is run to remove `+rhel1+` from the satellite server so
 that we can register it again to show REX pull mode is automatically
 enabled.
 
-From the Satellite server, we’ll register `+rhel1+` to Satellite again.
+In `satellite.lab terminal`, we’ll register `+rhel1+` to Satellite again.
 
 [source,bash,run]
 ----
@@ -298,19 +356,20 @@ ssh -o "StrictHostKeyChecking no" rhel1 $regscript
 
 Here’s what the registration operation output looks like for `+rhel1+`.
 
-.rex pull
-image::../assets/rexpullrhel1auto.png[rex pull]
+.REX pull
+image::rexpullrhel1auto.png[rex pull]
 
 Notice the installation of `+yggdrasild+` components.
 
-You can check to see if REX pull mode was successfully configured
-onlink:tab-2[button label="`rhel1`" background="`#ee0000`"
-color="`#c7c7c7`"] by checking the yggdrasild demon is running.
+You can check to see if REX pull mode was successfully configured in `rhel1.lab terminal` by checking the yggdrasild demon is running.
 
 [source,bash,run]
 ----
 systemctl status yggdrasild
 ----
+
+====
+=====
 
 == Force a single errata to be detected on rhel1
 
@@ -319,35 +378,49 @@ that at least one errata is installable on `+rhel1+`. This prepares
 `+rhel1+` for the next step where we will install errata with REX pull
 mode.
 
-Run the following command in the link:tab-2[button label="`rhel1`"
-background="`#ee0000`" color="`#c7c7c7`"] tab.
+=====
+.Force a single errata to be detected on rhel1
+[%collapsible]
+====
+
+Run the following command in `rhel1.lab terminal`.
 
 [source,bash,run]
 ----
 dnf downgrade -y vim
 ----
 
+====
+=====
+
 == Apply installable errata to rhel1 using REX pull mode
+
+Now well install the errata for vim via REX pull mode.
+
+=====
+.Apply installable errata to rhel1 using REX pull mode
+[%collapsible]
+====
 
 Navigate to the `+Errata+` menu.
 
-.errata
-image::../assets/erratamenubar.png[errata]
+.Errata menu
+image::erratamenubar.png[errata]
 
 Filter for the installable errata.
 
-.filter
-image::../assets/installable.png[filter]
+.Filter for the installable errata
+image::installable.png[filter]
 
 Select the installable errata.
 
-.installable
-image::../assets/selectallerrata.png[installable]
+.Installable errata
+image::selectallerrata.png[installable]
 
 Click `+Apply errata+`.
 
-.apply
-image::../assets/applyerrata.png[apply]
+.Apply errata
+image::applyerrata.png[apply]
 
 In the `+Apply errata+` wizard, do the following.
 
@@ -355,8 +428,8 @@ In the `+Apply errata+` wizard, do the following.
 . Select `+rhel1+`.
 . Click `+Next+`.
 
-.apply
-image::../assets/applyerratawizard.png[apply]
+.Apply errata wizard
+image::applyerratawizard.png[apply]
 
 Click `+Confirm+`.
 
@@ -365,25 +438,26 @@ Click confirm to apply the errata.
 To view the application of Errata in real-time, click on the host
 `+rhel1+`.
 
-.view
-image::../assets/viewapplicationoferratahost.png[view]
+.View errata application
+image::viewapplicationoferratahost.png[view]
 
 On the following page, you’ll be able to see the application process.
 
-.process
-image::../assets/process.png[process]
+.Process
+image::process.png[process]
 
 To return to the job status page, click `+Back to Job+`.
 
-.back to job
-image::../assets/backtojob.png[back to job]
+.Back to job
+image::backtojob.png[back to job]
 
 When the job is complete, the page will look like this.
 
-____
-[!NOTE] Don’t wait for the updates to complete. Please advance to the
+NOTE: Don’t wait for the updates to complete. Please advance to the
 next assignment.
-____
 
-.complete
-image::../assets/completejobstatus.png[complete]
+.Job status
+image::completejobstatus.png[complete]
+
+====
+=====

@@ -96,7 +96,7 @@ through the default `+Library+` lifecycle environment.
 [%collapsible]
 ====
 
-Execute the playbook by clicking on `+run+`.
+Run the playbook in the `satellite.lab terminal`.
 
 [source,bash,run]
 ----

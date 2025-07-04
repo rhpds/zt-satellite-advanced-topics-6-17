@@ -98,6 +98,8 @@ through the default `+Library+` lifecycle environment.
 
 Run the playbook in the `satellite.lab terminal`.
 
+
+
 [source,bash,run]
 ----
 ansible-playbook config.yml

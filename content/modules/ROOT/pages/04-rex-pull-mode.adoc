@@ -102,7 +102,7 @@ We'll need to open port 1883 to enable MQTT communication between RHEL systems a
 [%collapsible]
 ====
 
-Open the required firewall ports with the following command.
+Open the required firewall ports with the following command in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
@@ -137,7 +137,7 @@ in this document].
 [%collapsible]
 ====
 
-Copy and run the following script.
+Run the following script in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
@@ -185,24 +185,22 @@ In the `rhel1.lab terminal` run this command.
 dnf install katello-pull-transport-migrate -y
 ----
 
-____
-[!NOTE] The `+katello-pull-transport-migrate+` package is provided by
+NOTE: The `+katello-pull-transport-migrate+` package is provided by
 the `+satellite-client-6-for-rhel-9-x86_64-rpms+` repository. This repo
 was added to the satellite server and enabled by the activation key in
 the second task of this lab.
-____
 
 Check that the MQTT agent `+yggdrasild+` is running in `rhel1.lab terminal`.
 
 [source,bash,run]
 ----
-systemctl status yggdrasild
+systemctl status com.redhat.Yggdrasil1.Worker1.foreman.service
 ----
 
 The output should look like the screenshot below.
 
 .yggdrasild service
-image::yggdrasildservicestatus.png[yggdrasild service]
+image::ygg_service.png[yggdrasild service]
 
 ====
 =====
@@ -339,7 +337,7 @@ command in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
-ssh -o "StrictHostKeyChecking no" rhel1 "subscription-manager unregister" && ssh -o "StrictHostKeyChecking no" rhel1 "dnf remove -y katello-pull-transport-migrate"
+ssh -o "StrictHostKeyChecking no" root@rhel1 "subscription-manager unregister" && ssh -o "StrictHostKeyChecking no" root@rhel1 "dnf remove -y katello-pull-transport-migrate"
 ----
 
 This command is run to remove `+rhel1+` from the satellite server so
@@ -351,7 +349,7 @@ In `satellite.lab terminal`, we’ll register `+rhel1+` to Satellite again.
 [source,bash,run]
 ----
 export regscript=$(hammer host-registration generate-command --activation-key RHEL10 --setup-insights 0 --insecure 1 --force 1)
-ssh -o "StrictHostKeyChecking no" rhel1 $regscript
+ssh -o "StrictHostKeyChecking no" root@rhel1 $regscript
 ----
 
 Here’s what the registration operation output looks like for `+rhel1+`.
@@ -365,29 +363,7 @@ You can check to see if REX pull mode was successfully configured in `rhel1.lab 
 
 [source,bash,run]
 ----
-systemctl status yggdrasild
-----
-
-====
-=====
-
-== Force a single errata to be detected on rhel1
-
-In this step, we’ll downgrade `+vim+` in to compel Satellite to detect
-that at least one errata is installable on `+rhel1+`. This prepares
-`+rhel1+` for the next step where we will install errata with REX pull
-mode.
-
-=====
-.Force a single errata to be detected on rhel1
-[%collapsible]
-====
-
-Run the following command in `rhel1.lab terminal`.
-
-[source,bash,run]
-----
-dnf downgrade -y vim
+systemctl status com.redhat.Yggdrasil1.Worker1.foreman.service
 ----
 
 ====

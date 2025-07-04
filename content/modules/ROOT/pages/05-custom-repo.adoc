@@ -1,3 +1,5 @@
+== Custom repositories
+
 In this assignment we’ll upload software into a custom repository in
 Satellite. This process involves creating the following:
 
@@ -12,9 +14,14 @@ single package to the new repository.
 
 == Create a custom product, repository, and upload a file
 
-Add the following playbook to the `+Satellite Server+` by first clicking
-on this button link:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"]. Then click on `+run+` below.
+In this step we'll create a custom product, repository, and then upload our file to it.
+
+=====
+.Create a custom product, repository, and upload a file
+[%collapsible]
+====
+
+Run this script to create a playbook that will create a custom product, a customer repository and upload an RPM in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
@@ -65,12 +72,15 @@ This playbook dows the following:
 . Upload a file from `+/root/hello-0.0.1-1.el9.noarch.rpm+` to
 `+My custom repository+`.
 
-Run the playbook.
+Run the playbook in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
 ansible-playbook customrepo.yml
 ----
+
+====
+=====
 
 == Update the RHEL10 content view and publish and promote it
 
@@ -89,9 +99,12 @@ version of the `+RHEL10+` content view to the `+Capsule Production+`
 lifecycle environment which will automatically synchronize to
 `+capsule.lab+`.
 
-Add the following playbook to the `+Satellite Server+` by first clicking
-on this button link:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"]. Then click on `+run+` below.
+=====
+.Update the RHEL10 content view and publish and promote it.
+[%collapsible]
+====
+
+Add the following playbook to the `+Satellite Server+` by running the script below in `satellite.lab terminal`
 
 [source,bash,run]
 ----
@@ -117,18 +130,26 @@ tee ~/customrepopublishpromote.yml << EOF
 EOF
 ----
 
-Run the playbook.
+Run the playbook in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
 ansible-playbook customrepopublishpromote.yml
 ----
 
+====
+=====
+
 == Enable "`My custom repository`"
 
-View the repositories available to `+rhel1+`. In the link:tab-2[button
-label="`rhel1`" background="`#ee0000`" color="`#c7c7c7`"] terminal, run
-the following.
+On the system `rhel1.lab`, we have to enable the repository.
+
+=====
+.Enable "`My custom repository`"
+[%collapsible]
+====
+
+View the repositories available to `rhel1.lab terminal` by running the following command.
 
 [source,bash,run]
 ----
@@ -138,21 +159,28 @@ subscription-manager repos
 Here’s the output.
 
 .repos
-image::../assets/reposavailable.png[repos]
+image::reposavailable.png[repos]
 
-In the link:tab-2[button label="`rhel1`" background="`#ee0000`"
-color="`#c7c7c7`"] terminal, run the following command to enable
-`+My custom repository+`.
+Enable the repo by running the command below in `rhel1.lab terminal`
 
 [source,bash,run]
 ----
 subscription-manager repos --enable Acme_Org_My_custom_product_My_custom_repository
 ----
 
+====
+=====
+
 == Install the rpm on rhel1
 
-In the link:tab-2[button label="`rhel1`" background="`#ee0000`"
-color="`#c7c7c7`"] terminal run the following command.
+Let's install our rpm.
+
+=====
+.Install the rpm on rhel1
+[%collapsible]
+====
+
+Run this command in `rhel1.lab terminal`
 
 [source,bash,run]
 ----
@@ -160,11 +188,9 @@ dnf install -y hello
 ----
 
 .install
-image::../assets/helloinstall.png[install]
+image::helloinstall.png[install]
 
-Test the installation by running the following command in the
-link:tab-2[button label="`rhel1`" background="`#ee0000`"
-color="`#c7c7c7`"] terminal.
+Test the installation by running the following command in `rhel1.lab terminal`
 
 [source,bash,run]
 ----
@@ -172,4 +198,7 @@ hello.sh
 ----
 
 .output
-image::../assets/helloshoutput.png[output]
+image::helloshoutput.png[output]
+
+====
+=====

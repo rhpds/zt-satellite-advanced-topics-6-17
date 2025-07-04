@@ -1,3 +1,5 @@
+== Inter-Satellite Sync network sync
+
 Inter-Satellite Sync (ISS) network sync enables a downstream satellite
 server to synchronize data from an upstream satellite server instead of
 the Red Hat content delivery network (CDN). The benefit of this feature
@@ -23,8 +25,12 @@ downstream satellite servers, we need to import the upstream
 (`+satellite.lab+`) SSL certificate into the downstream satellite server
 (`+satellite-2.lab+`).
 
-Enter the following command into the link:tab-2[button label="`Satellite
-Server 2`"] terminal.
+=====
+.Import the ssl certification from satellite.lab
+[%collapsible]
+====
+
+Enter the following command in `satellite-2.lab terminal`.
 
 [source,bash,run]
 ----
@@ -34,7 +40,7 @@ wget -P ~ http://satellite.lab/pub/katello-server-ca.crt
 This command will download the `+katello-server-ca.crt+` from
 `+satellite.lab+` to `+satellite-2.lab+`.
 
-Next, in the link:tab-2[button label="`Satellite Server 2`"] terminal,
+Next, in the `satellite-2.lab terminal`,
 use the following command to import the certificate.
 
 [source,bash,run]
@@ -46,94 +52,127 @@ hammer content-credential create \
 --path ~/katello-server-ca.crt
 ----
 
+====
+=====
+
 == Configure the downstream satellite server to use the upstream satellite server as a CDN
+
+Now we'll configure the downstream satellite server `satellite-2.lab` to use the upstream satellite server, `satellite.lab` as a content delivery network (CDN).
+
+=====
+.Configure the downstream satellite server to use the upstream satellite server as a CDN
+[%collapsible]
+====
 
 In the `+Satellite Server 2 Web UI+`, log in with the following
 credentials.
 
 Username
 
-....
+[source,js]
+----
 admin
-....
+----
 
 Password
 
-....
+[source,js]
+----
 bc31c9a6-9ff0-11ec-9587-00155d1b0702
-....
+----
 
-____
-[!IMPORTANT] Make sure that the organization is set to `+Acme Org+` and
+IMPORTANT: Make sure that the organization is set to `+Acme Org+` and
 the location is set to `+Kicking Horse+`.
 
-image:../assets/organdloacation.gif[../assets/organdloacation]
-____
+.Location
+image::organdloacation.gif[../assets/organdloacation]
 
 Navigate to `+Subscriptions+`.
 
-image:../assets/subscriptions.png[../assets/subscriptions]
+.Subscriptions
+image::subscriptions.png[../assets/subscriptions]
 
 Click `+Manage Manifest+`.
 
-image:../assets/managemanifest.png[../assets/managemanifest]
+.Manage manifests
+image::managemanifest.png[../assets/managemanifest]
 
 Click the tab `+CDN Configuration+`.
 
-image:../assets/cdnconfig.png[../assets/cdnconfig]
+.CDN Configuration
+image::cdnconfig.png[../assets/cdnconfig]
 
 Click `+Network Sync+`.
 
-image:../assets/networksync.png[../assets/networksync]
+.Network Sync
+image::networksync.png[../assets/networksync]
 
 Perform the following tasks. 1) Enter the url for satellite.lab.
 
-....
+[source,js]
+----
 https://satellite.lab
-....
+----
 
 [arabic, start=2]
 . Enter the username `+admin+`.
 
-....
+[source,js]
+----
 admin
-....
+----
 
 [arabic, start=3]
 . Enter the following password.
 
-....
+[source,js]
+----
 bc31c9a6-9ff0-11ec-9587-00155d1b0702
-....
+----
 
 [arabic, start=4]
 . Enter the organization `+Acme_Org+`
 
-....
+[source,js]
+----
 Acme_Org
-....
+----
 
 [arabic, start=5]
 . Choose the SSL CA Content Credential `+satellite.lab+`.
 . Click `+Update+`.
 . Click `+Close+`.
 
-image:../assets/networksyncconfig.png[../assets/networksyncconfig]
+.Network sync configuration
+image::networksyncconfig.png[../assets/networksyncconfig]
+
+====
+=====
 
 == Verify that satellite-2.lab can synchronize software from satellite.lab
 
+Let's check that it works.
+
+=====
+.Verify that satellite-2.lab can synchronize software from satellite.lab
+[%collapsible]
+====
+
 Navigate to the `+Red Hat Repositories+` menu.
 
-image:../assets/redhatrepositories.png[../assets/redhatrepositories]
+.Red Hat Repositories
+image::redhatrepositories.png[../assets/redhatrepositories]
 
 Click on the `+Recommended Repositories+` slider to change it to `+ON+`.
 
-image:../assets/recommendedrepos.png[../assets/recommendedrepos]
+.Recommended Repositories
+image::recommendedrepos.png[../assets/recommendedrepos]
 
-Select the `+Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9+`
+Select the `+Red Hat Enterprise Linux 10 for x86_64 - BaseOS RPMs 10+`
 repository.
 
-image:../assets/selectRHEL10baseos.gif[../assets/selectRHEL10baseos]
+.RHEL BaseOS repo
+image::selectRHEL9baseos.gif[../assets/selectRHEL10baseos]
 
 It is possible to select this repository because it has been provided by
 the upstream satellite server `+satellite.lab+`.
@@ -142,20 +181,24 @@ If we select another repository that hasn’t been synchronized to the
 upstream satellite server, a message would display
 `+No repositories available+`.
 
-image:../assets/norepoavailable.gif[../assets/norepoavailable]
+.No repositories available
+image::norepoavailable.gif[../assets/norepoavailable]
 
 Navigate to the Products menu.
 
-image:../assets/products.png[../assets/products]
+.Products menu
+image::products.png[../assets/products]
 
 Sync all the products.
 
-image:../assets/syncproducts.gif[../assets/syncproducts]
+.Sync products
+image::syncproducts.gif[../assets/syncproducts]
 
-____
-[!NOTE] You can skip to the next assignment without waiting for the
+NOTE: You can skip to the next assignment without waiting for the
 synchronization to complete.
-____
+
+====
+=====
 
 == Optional self-directed exercise for the reader
 

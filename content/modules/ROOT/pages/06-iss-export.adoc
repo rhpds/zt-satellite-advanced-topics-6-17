@@ -1,3 +1,5 @@
+== Inter-Satellite Sync export sync
+
 Inter-Satellite Sync (ISS) export sync exports software at the
 repository, content view, and lifecycle environment levels. In this
 assignment, we’ll export the custom repo '`My custom repository`' at the
@@ -9,9 +11,12 @@ content view level from `+satellite.lab+` and import it into
 In order to save time, we’ll create a new content view with a minimal
 amount of software.
 
-Copy and paste the following playbook into the link:tab-0[button
-label="`Satellite Server`" background="`#ee0000`" color="`#c7c7c7`"]
-terminal.
+=====
+.Create a new content view
+[%collapsible]
+====
+
+Run the following script in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
@@ -50,106 +55,131 @@ containing the repository `+My custom repository+`. Then the playbook
 publishes and promotes the content view `+ISS Export+` to the
 `+Library+` lifecycle environment.
 
-Run the `+createandpublishissexport.yml+` playbook in the
-link:tab-0[button label="`Satellite Server`" background="`#ee0000`"
-color="`#c7c7c7`"] terminal.
+Execute the playbook in `satellite.lab terminal`
 
 [source,bash,run]
 ----
 ansible-playbook createandpublishissexport.yml
 ----
 
+====
+=====
+
 == Create an Inter-Satellite Sync export
 
 Now we’ll export the content view `+ISS Export+` as an ISS export.
 
-Copy and paste the following command into the link:tab-0[button
-label="`Satellite Server`" background="`#ee0000`" color="`#c7c7c7`"]
-terminal.
+=====
+.Create an ISS sync export
+[%collapsible]
+====
+
+Run the command below in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
 hammer content-export complete version --content-view "ISS Export" --version "1.0" --organization "Acme Org"
 ----
 
+====
+=====
+
 == Copy the exported data to satellite-2.lab
 
-On the link:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"], you can find the exported
-data in
-`+/var/lib/pulp/exports/Acme_Org/Default_Organization_View/1.0/+`.
+We'll copy the exported data to satellite-2.lab.
+
+=====
+.Copy the exported data to satellite-2.lab
+[%collapsible]
+====
+
+In `satellite.lab terminal` you can find the exported data in `+/var/lib/pulp/exports/Acme_Org/Default_Organization_View/1.0/+`.
 
 [source,bash,run]
 ----
 ls /var/lib/pulp/exports/Acme_Org/ISS_Export/1.0/*/
 ----
 
-image:../assets/exportedcv.png[../assets/exportedcv]
+.Exported data
+image::exportedcv.png[exportedcv]
 
-In thelink:tab-0[button label="`Satellite Server`"
-background="`#ee0000`" color="`#c7c7c7`"] terminal run the following
-command.
+In the `satellite.lab terminal` run the following command.
 
 [source,bash,run]
 ----
-scp -o "StrictHostKeyChecking no" -rp /var/lib/pulp/exports/Acme_Org/ISS_Export/1.0/*/ satellite-2.lab:/var/lib/pulp/imports/Acme_Org/
+scp -o "StrictHostKeyChecking no" -rp /var/lib/pulp/exports/Acme_Org/ISS_Export/1.0/*/ root@satellite-2.lab:/var/lib/pulp/imports/Acme_Org/
 ----
 
-image:../assets/mvexportstosatellite2.png[../assets/mvexportstosatellite2]
+.SCP the data
+image::mvexportstosatellite2.png[../assets/mvexportstosatellite2]
 
 This command will create a new directory on `+satellite-2.lab+` in
 `+/var/lib/pulp/imports+` called `+Acme_Org+` and copy all the exported
 data to it.
 
+====
+=====
+
 == Import the exported data into satellite-2.lab
 
-We need to change the ownership of the data we just exported to the
-`+pulp+` account and group. Switch to the link:tab-2[button
-label="`Satellite Server 2`"] terminal and enter the following command.
+Now we'll import the data into `satellite-2.lab`.
+
+=====
+.Import the exported data into satellite-2.lab
+[%collapsible]
+====
+
+We need to change the ownership of the data we just exported to the `+pulp+` account and group. In `satellite-2.lab terminal` run the following command.
 
 [source,bash,run]
 ----
 chown -R pulp:pulp /var/lib/pulp/imports/Acme_Org/
 ----
 
-In the link:tab-2[button label="`Satellite Server 2`"] terminal, run the
-following command.
+In `satellite-2.lab terminal`, run the following command to import the exported data.
 
 [source,bash,run]
 ----
 hammer content-import version --organization "Acme Org" --path "/var/lib/pulp/imports/Acme_Org"
 ----
 
-You can verify the result in the web gui with the same credentials as
-`+satellite.lab+`. Click on the `+Satellite 2 Web UI+`.
+You can verify the result in the web gui with the same credentials as `+satellite.lab+`. Click on the `+Satellite 2 Web UI+`.
 
 Username
 
-....
+[source,js]
+----
 admin
-....
+----
 
 Password
 
-....
+[source,js]
+----
 bc31c9a6-9ff0-11ec-9587-00155d1b0702
-....
+----
 
-____
-{empty}[!IMPORTANT] Ensure that you are in `+Acme Org+` organization and
+IMPORTANT: Ensure that you are in `+Acme Org+` organization and
 the `+Kicking Horse+` location.
-image:../assets/exportedissexport.png[../assets/exportedissexport]
-____
+
+.Exported content view in satellite-2.lab
+image::exportedissexport.png[../assets/exportedissexport]
 
 Click on `+ISS Export+`.
 
-image:../assets/issexportcv.png[../assets/issexportcv]
+.ISS Export content view
+image::issexportcv.png[../assets/issexportcv]
 
 In the `+ISS Export+` menu, click on `+Repositories+`.
 
-image:../assets/issexportrepos.png[../assets/issexportrepos]
+.ISS Export menu
+image::issexportrepos.png[../assets/issexportrepos]
 
 In this menu you can see that we have successfully imported the
 repository `+My custom repository+`.
 
-image:../assets/exportedcustomrepo.png[../assets/exportedcustomrepo]
+.My custom repository
+image::exportedcustomrepo.png[../assets/exportedcustomrepo]
+
+====
+=====

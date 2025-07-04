@@ -118,7 +118,12 @@ Switch to the `satellite.lab terminal`.
 .satellite.lab terminal
 image::satellite.lab-terminal.png[]
 
-Run the following script.
+Run the following script. You can click the run button as shown below to run the script in `satellite.lab terminal`.
+
+.Run button
+image::run-button.png[]
+
+Try it.
 
 [source,bash,run]
 ----

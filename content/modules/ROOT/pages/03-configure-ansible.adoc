@@ -17,6 +17,10 @@ WARNING: To reduce the amount of time waiting for for satellite
 operations to complete, the Satellite Ansible Collection has been
 preinstalled. Please read over this section and go to the next step.
 
+=====
+.Install the Satellite Ansible collection - FOR DOCUMENTATION PURPOSES ONLY
+[%collapsible]
+====
 IMPORTANT: For reference, the following command installs the Satellite
 Ansible Collection. ##Do not run it##.
 
@@ -28,18 +32,26 @@ satellite-maintain packages install -y ansible-collection-redhat-satellite
 .output
 image::ansiblecollectionoutput.png[output]
 
+====
+=====
+
 == Create a playbook to configure the Satellite server
 
 The playbook below is simply an example.
 
 WARNING: Never put clear text passwords in your playbook.
 
+=====
+.Create a playbook to configure the Satellite server
+[%collapsible]
+====
+
 Switch to the `satellite.lab terminal`.
 
 .satellite.lab terminal
 image::satellite.lab-terminal.png[sat term]
 
-Next, copy and paste the code below to write the following ansible playbook.
+Next, run the script below to write the following ansible playbook.
 
 [source,bash,run]
 ----
@@ -74,7 +86,15 @@ The RHEL 10 BaseOS and AppStream, and Satellite Client repos have already
 been synchronized and enabled to save time. These repos are available
 through the default `+Library+` lifecycle environment.
 
+====
+=====
+
 == Execute the playbook
+
+=====
+.Execute the playbook
+[%collapsible]
+====
 
 Execute the playbook by clicking on `+run+`.
 
@@ -87,3 +107,6 @@ IMPORTANT: The repositories configured have already been synchronized to
 save time.
 
 Click next to advance to the next assignment.
+
+====
+=====

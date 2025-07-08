@@ -7,11 +7,11 @@ is simplifying environments where network separation is required to
 segregate infrastructure from direct connections to the internet. ISS
 network sync is useful where DMZ topologies are required.
 
-ISS network sync configuration consists of the following. 1) An upstream
+ISS network sync configuration consists of the following.
+
+. An upstream
 satellite server (`+satellite.lab+`) synchronizing software from the Red
 Hat CDN.
-
-[arabic, start=2]
 . A downstream satellite server (`+satellite-2.lab+`) configured to
 synchronize software from `+satellite.lab+`.
 
@@ -107,7 +107,10 @@ Click `+Network Sync+`.
 .Network Sync
 image::networksync.png[../assets/networksync]
 
-Perform the following tasks. 1) Enter the url for satellite.lab.
+Perform the following tasks.
+
+[arabic, start=1]
+.Enter the url for satellite.lab.
 
 [source,js]
 ----
@@ -131,7 +134,7 @@ bc31c9a6-9ff0-11ec-9587-00155d1b0702
 ----
 
 [arabic, start=4]
-. Enter the organization `+Acme_Org+`
+. Enter the `Organization label` `+Acme_Org+`
 
 [source,js]
 ----

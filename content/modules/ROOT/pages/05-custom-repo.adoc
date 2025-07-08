@@ -76,8 +76,10 @@ Run the playbook in `satellite.lab terminal`.
 
 [source,bash,run]
 ----
-ansible-playbook customrepo.yml
+ansible-playbook customrepo.yml -e 'ansible_python_interpreter=/usr/bin/python3'
 ----
+
+NOTE: Due to a bug, `-e 'ansible_python_interpreter=/usr/bin/python3'` is required to run the playbook. This is a workaround for the bug that prevents the playbook from running with the default Python interpreter. See https://issues.redhat.com/browse/SAT-35640
 
 ====
 =====

@@ -374,7 +374,7 @@ following.
 . Paste the label of the updated container image in the
 target field.
 
-[source,bash,run]
+[source,js]
 ----
 satellite.lab/acme_org/bootc/rhel10beta:summit-2025
 ----

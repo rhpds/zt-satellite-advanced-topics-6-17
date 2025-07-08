@@ -194,7 +194,7 @@ Check that the MQTT agent `+yggdrasild+` is running in `rhel1.lab terminal`.
 
 [source,bash,run]
 ----
-systemctl status com.redhat.Yggdrasil1.Worker1.foreman.service
+systemctl status yggdrasil.service
 ----
 
 The output should look like the screenshot below.
@@ -363,7 +363,7 @@ You can check to see if REX pull mode was successfully configured in `rhel1.lab 
 
 [source,bash,run]
 ----
-systemctl status com.redhat.Yggdrasil1.Worker1.foreman.service
+systemctl status yggdrasil.service
 ----
 
 ====

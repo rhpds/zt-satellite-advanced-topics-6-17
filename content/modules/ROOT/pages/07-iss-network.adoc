@@ -175,7 +175,7 @@ Select the `+Red Hat Enterprise Linux 10 for x86_64 - BaseOS RPMs 10+`
 repository.
 
 .RHEL BaseOS repo
-image::selectRHEL9baseos.gif[../assets/selectRHEL10baseos]
+image::rhel10baseos.gif[../assets/selectRHEL10baseos]
 
 It is possible to select this repository because it has been provided by
 the upstream satellite server `+satellite.lab+`.

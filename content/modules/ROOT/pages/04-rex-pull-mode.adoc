@@ -399,14 +399,21 @@ In the `+Run job+` menu, ensure that the `Commands` job category and `Run Comman
 .Commands job category
 image::categoryandtemplate.png[commands job category]
 
-In the `+Target hosts and inputs+` menu, enter the following command in the `+Command+` box:
+. In the `+Target hosts and inputs+` menu, enter the following command in the `+Command+` box:
 
 [source,js]
 ----
 dnf install -y openssl-devel
 ----
 
-Then click `+Run on selected hosts+`.
+[arabic,start=2]
+. Then click `+Run on selected hosts+`.
+
+.Install openssl-devel
+image::installopensshdevel.png[install openssl-devel]
+
+The job will run and the `+Results+` menu will show 100% when the job is
+complete.
 
 ====
 =====

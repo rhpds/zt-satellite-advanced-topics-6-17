@@ -369,71 +369,44 @@ systemctl status yggdrasil.service
 ====
 =====
 
-== Apply installable errata to rhel1 using REX pull mode
+== Install a package to verify REX pull mode
 
-Now well install the errata for vim via REX pull mode.
+Now we’ll install a package to verify that REX pull mode is working.
 
 =====
-.Apply installable errata to rhel1 using REX pull mode
+.Install a package to verify REX pull mode
 [%collapsible]
 ====
 
-Navigate to the `+Errata+` menu.
-
-.Errata menu
-image::erratamenubar.png[errata]
-
-Filter for the installable errata.
-
-.Filter for the installable errata
-image::installable.png[filter]
-
-Select the installable errata.
-
-.Installable errata
-image::selectallerrata.png[installable]
-
-Click `+Apply errata+`.
-
-.Apply errata
-image::applyerrata.png[apply]
-
-In the `+Apply errata+` wizard, do the following.
-
-[arabic]
-. Select `+rhel1+`.
-. Click `+Next+`.
-
-.Apply errata wizard
-image::applyerratawizard.png[apply]
-
-Click `+Confirm+`.
-
-Click confirm to apply the errata.
-
-To view the application of Errata in real-time, click on the host
+Navigate to the `+All hosts+` menu in the Satellite Web UI and select
 `+rhel1+`.
 
-.View errata application
-image::viewapplicationoferratahost.png[view]
+.All hosts menu
+image::allhosts.png[all hosts menu]
 
-On the following page, you’ll be able to see the application process.
+Select the `+rhel1+` host.
 
-.Process
-image::process.png[process]
+.rhel1 host
+image::selectrhel1.png[rhel1 host]
 
-To return to the job status page, click `+Back to Job+`.
+Select `Schedule Remote Job` button.
 
-.Back to job
-image::backtojob.png[back to job]
+.Schedule button
+image::schedulerhel1.png[schedule button]
 
-When the job is complete, the page will look like this.
+In the `+Run job+` menu, ensure that the `Commands` job category and `Run Command - Script Default` job template are selected and click next.
 
-NOTE: Don’t wait for the updates to complete. Please advance to the
-next assignment.
+.Commands job category
+image::categoryandtemplate.png[commands job category]
 
-.Job status
-image::completejobstatus.png[complete]
+In the `+Target hosts and inputs+` menu, enter the following command in the `+Command+` box:
+
+[source,js]
+----
+dnf install -y openssl-devel
+----
+
+Then click `+Run on selected hosts+`.
 
 ====
 =====

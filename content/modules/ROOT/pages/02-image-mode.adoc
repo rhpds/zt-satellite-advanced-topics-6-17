@@ -228,7 +228,7 @@ Copy and run the script below.
 ----
 cat <<EOT > Containerfile
 FROM quay.io/toharris/rhel-bootc:summit-2025
-RUN echo “Welcome to Summit 2025” > /etc/motd
+RUN echo "Welcome to Summit 2025" > /etc/motd
 EOT
 ----
 

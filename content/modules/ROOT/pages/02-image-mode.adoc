@@ -159,7 +159,7 @@ image::bootedcontainerimagehosts.png[../assets/bootedcontainerimagehosts]
 Next do the following.
 
 . Check the box to the left of the Power button.
-. Select "`Schedule Remote Job`".
+. Select "`Schedule a Job`".
 
 .Schedule remote job
 image::runremotejobrhel2.png[../assets/runremotejobrhel2]
@@ -167,7 +167,7 @@ image::runremotejobrhel2.png[../assets/runremotejobrhel2]
 Next we’ll create a job to check bootc status.
 
 . Select the "`Bootc`" job category.
-. Select "`Bootc Status - Script Default`".
+. Select "`Bootc Script - Script Default`".
 . Click "`Next`".
 
 .Run job wizard
@@ -332,7 +332,7 @@ Now we'll initiate an operation to update the image on the image mode host.
 Let’s schedule a remote job.
 
 . Go to all hosts and check the box for `+rhel2+`.
-. Click on `+Schedule Remote Job+`.
+. Click on `+Schedule a Job+`.
 
 .Schedule Remote Job
 image::runremotejobrhel2.png[../assets/runremotejobrhel2]
